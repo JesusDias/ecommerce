@@ -4,7 +4,7 @@
     //Rain Tpl tem o namespace dele mesmo que é "Rain\Tpl"
     use Rain\Tpl;
 
-    Class Page {
+    class Page {
         private $tpl;
         private $options = [];
         private $defaults = [
@@ -13,7 +13,7 @@
 
         public function __construct($opts = array()){
 
-            $this->options = array_merge($this->$defaults, $opts);
+            $this->options = array_merge($this->defaults, $opts);
             $config = array(
                 "tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/",
                 "cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
