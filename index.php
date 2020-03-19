@@ -41,10 +41,9 @@ $app->get('/admin/login', function() {
 });
 
 $app->post('/admin/login', function() {
-	//se não tive nenhuma exception esse método vai pegar essa duas informações
+	
 	User::login($_POST["login"], $_POST["password"]);
 
-	//e vai redirecionar a página para /admin
 	header("Location: /admin");
 	exit;
 });
@@ -56,6 +55,48 @@ $app->get('/admin/logout', function() {
 	exit;
 });
 
+$app->get("/admin/users" , function() {
+	
+	User::verifyLogin();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users");
+
+});
+
+$app->get("admin/users/create" , function() {
+	User::verifyLogin();
+	
+	$page = new PageAdmin();
+
+	$page->setTpl("users-create");
+
+});
+
+$app->get("admin/users/:iduser" , function($iduser) {
+	User::verifyLogin();
+	
+	$page = new PageAdmin();
+
+	$page->setTpl("users-update");
+
+});
+
+$app->post("admin/users/create", function(){
+	User::verifyLogin();
+
+});
+
+$app->post("admin/users/:iduser", function($iduser){
+	User::verifyLogin();
+
+});
+
+$app->delete("admin/users/:iduser", function($iduser){
+	User::verifyLogin();
+
+});
 $app->run();
 
  ?>
